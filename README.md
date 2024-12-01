@@ -73,7 +73,7 @@ OVERALL TOTAL $208.47
 ## Running Terraform Locally
 
 ```sh
-export GCP_CREDENTIALS="/path/key/file.json"
+export GOOGLE_APPLICATION_CREDENTIALS="/path/key/file.json"
 export TF_BACKEND_BUCKET="bucket_name_example"
 export TF_BACKEND_PATH="prefix_example"
 
@@ -90,10 +90,9 @@ bash ./post/argocd-install.sh --update_proxy
 
 Ensure the following secrets are set in your GitHub repository:
 
-- `GCP_CREDENTIALS`: The JSON key for your Google Cloud service account.
+- `GOOGLE_APPLICATION_CREDENTIALS`: The JSON key for your Google Cloud service account.
 - `TF_BACKEND_BUCKET`: The name of the Terraform backend bucket.
 - `TF_BACKEND_PATH`: The path for the Terraform backend.
-- `GOOGLE_APPLICATION_CREDENTIALS`: The path to the Google Cloud service account key file.
 
 ## Acknowledgements
 
