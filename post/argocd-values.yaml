@@ -1,0 +1,41 @@
+global:
+  domain: "argocd.nonprod.chxwe.com"
+
+configs:
+  params:
+    server.insecure: true
+    users.anonymous.enabled: true
+  rbac:
+    policy.default: "role:unauthenticated"
+
+server:
+  service:
+    config:
+      users.anonymous.enabled: true
+    annotations:
+      cloud.google.com/neg: '{"ingress": true}'
+      cloud.google.com/backend-config: '{"ports": {"http":"argo-cd-argocd-server", "external-http":"argocd-backend-config"}}'
+
+  ingress:
+    annotations:
+    # google_dns_record_set.static.name
+    # google_compute_global_address.dns.name
+      kubernetes.io/ingress.global-static-ip-name: argocd-ipv4
+      networking.gke.io/managed-certificates: argo-cd-argocd-server
+    enabled: true
+    controller: gke
+    gke:
+      backendConfig:
+        healthCheck:
+          checkIntervalSec: 30
+          timeoutSec: 5
+          healthyThreshold: 1
+          unhealthyThreshold: 2
+          type: HTTP
+          requestPath: /healthz
+          port: 8080
+      frontendConfig:
+        redirectToHttps:
+          enabled: true
+      managedCertificate:
+        enabled: true
