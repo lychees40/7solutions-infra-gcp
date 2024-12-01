@@ -5,7 +5,7 @@ configs:
   params:
     server.insecure: true
   cm:
-    users.anonymous.enabled : true
+    users.anonymous.enabled: true
   rbac:
     policy.default: "role:readonly"
 
@@ -17,8 +17,8 @@ server:
 
   ingress:
     annotations:
-    # google_dns_record_set.static.name
-    # google_compute_global_address.dns.name
+      # google_dns_record_set.static.name
+      # google_compute_global_address.dns.name
       kubernetes.io/ingress.global-static-ip-name: argocd-ipv4
       networking.gke.io/managed-certificates: argo-cd-argocd-server
     enabled: true

@@ -8,4 +8,4 @@ secondary_ranges_gke_services = "10.2.0.0/24"
 gke_master_ipv4_cidr_block    = "10.3.0.0/28"
 domain                        = "nonprod.chxwe.com"
 cloud_dns_zone_name           = "gcp-public-zone-nonprod"
-control_plane_open            = false
+control_plane_open            = true
