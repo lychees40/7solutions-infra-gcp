@@ -16,8 +16,9 @@ jobs:
       - name: Install tfenv
         run: |
           git clone https://github.com/tfutils/tfenv.git ~/.tfenv
-          echo 'export PATH="$HOME/.tfenv/bin:$PATH"' >> ~/.bashrc
-          source ~/.bashrc
+          sudo rm /usr/local/bin/tfenv || echo "No tfenv installed"
+          sudo rm /usr/local/bin/terraform || echo "No terraform installed"
+          sudo ln -s ~/.tfenv/bin/* /usr/local/bin > /dev/null
 
       - id: "auth"
         uses: "google-github-actions/auth@v1"
