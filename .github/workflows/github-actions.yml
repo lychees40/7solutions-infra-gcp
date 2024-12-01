@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   terraform:
@@ -21,6 +18,7 @@ jobs:
           git clone https://github.com/tfutils/tfenv.git ~/.tfenv
           echo 'export PATH="$HOME/.tfenv/bin:$PATH"' >> ~/.bashrc
           source ~/.bashrc
+          terraform -v
 
       - id: "auth"
         uses: "google-github-actions/auth@v1"
