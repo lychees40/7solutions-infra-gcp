@@ -1,2 +1,2 @@
-provider "http" {}
+# provider "http" {}
 provider "google" {}

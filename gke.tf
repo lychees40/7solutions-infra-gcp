@@ -31,6 +31,7 @@ module "gke" {
   enable_private_endpoint = var.control_plane_open ? false : true
   master_authorized_networks = var.control_plane_open ? [
     {
+      # cidr_block   = "${chomp(data.http.ip_checker.body)}/32"
       cidr_block   = "0.0.0.0/0"
       display_name = "terraform-runner"
     }
