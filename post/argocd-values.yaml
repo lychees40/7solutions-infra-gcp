@@ -4,14 +4,13 @@ global:
 configs:
   params:
     server.insecure: true
-    users.anonymous.enabled: true
+  cm:
+    users.anonymous.enabled : true
   rbac:
-    policy.default: "role:unauthenticated"
+    policy.default: "role:readonly"
 
 server:
   service:
-    config:
-      users.anonymous.enabled: true
     annotations:
       cloud.google.com/neg: '{"ingress": true}'
       cloud.google.com/backend-config: '{"ports": {"http":"argo-cd-argocd-server", "external-http":"argocd-backend-config"}}'
