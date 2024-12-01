@@ -30,34 +30,34 @@ module "vpc" {
     ]
   }
 
-  ingress_rules = [
-    {
-      name          = "allow-https"
-      description   = "Allow https from anywhere"
-      direction     = "INGRESS"
-      priority      = 1000
-      source_ranges = ["0.0.0.0/0"]
-      allow = [
-        {
-          protocol = "tcp"
-          ports    = ["443"]
-        }
-      ]
-    },
-    {
-      name          = "allow-http"
-      description   = "Allow http from anywhere"
-      direction     = "INGRESS"
-      priority      = 1001
-      source_ranges = ["0.0.0.0/0"]
-      allow = [
-        {
-          protocol = "tcp"
-          ports    = ["80"]
-        }
-      ]
-    }
-  ]
+  # ingress_rules = [
+  #   {
+  #     name          = "allow-https"
+  #     description   = "Allow https from anywhere"
+  #     direction     = "INGRESS"
+  #     priority      = 1000
+  #     source_ranges = ["0.0.0.0/0"]
+  #     allow = [
+  #       {
+  #         protocol = "tcp"
+  #         ports    = ["443"]
+  #       }
+  #     ]
+  #   },
+  #   {
+  #     name          = "allow-http"
+  #     description   = "Allow http from anywhere"
+  #     direction     = "INGRESS"
+  #     priority      = 1001
+  #     source_ranges = ["0.0.0.0/0"]
+  #     allow = [
+  #       {
+  #         protocol = "tcp"
+  #         ports    = ["80"]
+  #       }
+  #     ]
+  #   }
+  # ]
 }
 
 module "cloud-nat" {
