@@ -1,6 +1,6 @@
 // GKE Cluster
 module "gke" {
-  source                               = "terraform-google-modules/kubernetes-engine/google//modules/private-cluster"
+  source                               = "terraform-google-modules/kubernetes-engine/google//modules/beta-private-cluster"
   version                              = "34.0.0"
   project_id                           = var.project_id
   name                                 = "${var.name}-${var.env}-gke"
@@ -25,7 +25,7 @@ module "gke" {
   security_posture_vulnerability_mode  = "VULNERABILITY_BASIC"
   release_channel                      = "STABLE"
   monitoring_enable_managed_prometheus = true
-
+  enable_secret_manager_addon          = true
 
   // Open gke control plane API conditionally
   enable_private_endpoint = var.control_plane_open ? false : true
