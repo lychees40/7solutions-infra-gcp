@@ -48,6 +48,7 @@ module "gke" {
       max_count            = 2
       disk_size_gb         = 40
       disk_type            = "pd-ssd"
+      kubernetes_version   = "1.30.5-gke.1443001"
       auto_repair          = true
       auto_upgrade         = true
       preemptible          = false
