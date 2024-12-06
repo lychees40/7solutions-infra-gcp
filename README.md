@@ -91,10 +91,9 @@ terraform plan -out=tfplan && terraform apply tfplan
 gcloud container clusters get-credentials <cluster_name> --region=<region>
 
 ## Todo : 1 script post 
-# Apply ExternalDNS configuration
-kubectl apply -f ./post/external-dns.yaml
-# Apply ArgoCD value 
-bash ./post/argocd-install.sh --install
+# 
+bash ./post/install-update-controller.sh --install-update-argocd
+bash ./post/install-update-controller.sh --install-update-external-dns
 
 
 ```
