@@ -26,7 +26,8 @@ module "gke" {
   release_channel                      = "STABLE"
   monitoring_enable_managed_prometheus = true
   enable_secret_manager_addon          = true
-
+  workload_vulnerability_mode          = "BASIC"
+  workload_config_audit_mode           = "BASIC"
   // Open gke control plane API conditionally
   enable_private_endpoint = var.control_plane_open ? false : true
   master_authorized_networks = var.control_plane_open ? [
