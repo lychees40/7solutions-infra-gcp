@@ -42,10 +42,10 @@ module "gke" {
   node_pools = [
     {
       name                 = "${var.name}${var.env}-node-pool"
-      machine_type         = "e2-standard-4"
+      machine_type         = "e2-standard-2"
       node_locations       = "${var.region}-a"
       min_count            = 1
-      max_count            = 2
+      max_count            = 1
       disk_size_gb         = 40
       disk_type            = "pd-ssd"
       kubernetes_version   = "1.30.5-gke.1443001"
