@@ -24,6 +24,7 @@ module "gke" {
   security_posture_mode                = "BASIC"
   security_posture_vulnerability_mode  = "VULNERABILITY_BASIC"
   release_channel                      = "STABLE"
+  kubernetes_version                   = "1.30.5-gke.1443001"
   monitoring_enable_managed_prometheus = true
   enable_secret_manager_addon          = true
   workload_vulnerability_mode          = "BASIC"
