@@ -41,8 +41,9 @@ module "gke" {
   depends_on = [module.vpc]
   node_pools = [
     {
-      name                 = "${var.name}${var.env}-node-pool"
-      machine_type         = "e2-standard-2"
+      name = "${var.name}${var.env}-node-pool"
+      # Default quotas for GKE = 8 core per region
+      machine_type         = "e2-standard-4"
       node_locations       = "${var.region}-a"
       min_count            = 1
       max_count            = 1
