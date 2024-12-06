@@ -86,19 +86,17 @@ terraform plan -out=tfplan && terraform apply tfplan
 
 ```sh
 # Must be reachable to the cluster
-bash ./post/argocd-install.sh --install
-bash ./post/argocd-install.sh --update_proxy
 
+# Get Kubeconfig
+gcloud container clusters get-credentials <cluster_name> --region=<region>
+
+## Todo : 1 script post 
 # Apply ExternalDNS configuration
 kubectl apply -f ./post/external-dns.yaml
-# resource "google_dns_record_set" "dns" {
-#   name         = "argocd.${var.domain}."
-#   type         = "A"
-#   ttl          = 300
-#   project      = var.project_id
-#   managed_zone = data.google_dns_managed_zone.dns_zone.name
-#   rrdatas      = [google_compute_global_address.static.address]
-# }
+# Apply ArgoCD value 
+bash ./post/argocd-install.sh --install
+
+
 ```
 
 ## GitHub Actions Workflow
@@ -116,3 +114,4 @@ Ensure the following secrets are set in your GitHub repository:
 - For the ArgoCD UI, consider using an internal load balancer and accessing it via a private network (VPN) or by whitelisting IPs with Cloud Armor.
 - Although the GKE cluster has a public IP with a whitelist to allow CICD/Local access, it is recommended to use a fully private cluster and a self-hosted agent like Jenkins to access the GKE cluster.
 - Set `control_plane_open` to true if you want to access the GKE Cluster. We recommend disabling it.
+- 

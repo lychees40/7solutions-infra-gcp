@@ -75,20 +75,3 @@ resource "google_compute_router" "router" {
   network = module.vpc.network_name
   region  = var.region
 }
-
-
-// Preparing argocd IP address and DNS record
-resource "google_compute_global_address" "static" {
-  name       = "argocd-ipv4"
-  project    = var.project_id
-  depends_on = [module.gke]
-}
-
-resource "google_dns_record_set" "dns" {
-  name         = "argocd.${var.domain}."
-  type         = "A"
-  ttl          = 300
-  project      = var.project_id
-  managed_zone = data.google_dns_managed_zone.dns_zone.name
-  rrdatas      = [google_compute_global_address.static.address]
-}
