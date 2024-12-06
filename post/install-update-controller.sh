@@ -10,7 +10,7 @@ usage() {
 UPDATE_ARGOCD=false
 UPDATE_EXTERNAL_DNS=false
 EXTERNALDNS_IMAGE_VERSION="0.15.0"
-ARGOCD_HELM_VERSION="7.7.0"
+ARGOCD_HELM_VERSION="7.7.7"
 
 # Display current versions
 echo "Current External DNS Image Version: ${EXTERNALDNS_IMAGE_VERSION}"
