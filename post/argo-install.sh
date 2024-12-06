@@ -40,7 +40,7 @@ if $INSTALL; then
 
   # Deploy Argo CD with custom values and specify the chart version
   helm upgrade --install argo-cd argo-helm/argo-cd \
-    --version 7.7.6 \
+    --version 7.7.7 \
     --create-namespace \
     --namespace argocd \
     --values argocd-values.yaml
