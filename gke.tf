@@ -21,6 +21,8 @@ module "gke" {
   remove_default_node_pool             = true
   disable_legacy_metadata_endpoints    = true
   network_policy                       = true
+  enable_intranode_visibility          = true
+  gateway_api_channel                  = "CHANNEL_STANDARD"
   security_posture_mode                = "BASIC"
   security_posture_vulnerability_mode  = "VULNERABILITY_BASIC"
   release_channel                      = "STABLE"
