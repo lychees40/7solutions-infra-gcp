@@ -90,8 +90,7 @@ terraform plan -out=tfplan && terraform apply tfplan
 # Get Kubeconfig
 gcloud container clusters get-credentials <cluster_name> --region=<region>
 
-## Todo : 1 script post 
-# 
+## Todo : 1 script post
 bash ./post/install-update-controller.sh --install-update-argocd
 bash ./post/install-update-controller.sh --install-update-external-dns
 
@@ -107,10 +106,13 @@ Ensure the following secrets are set in your GitHub repository:
 - `TF_BACKEND_PATH`: The path for the Terraform backend.
 
 ## Acknowledgements
+## Acknowledgements
 
-- Terraform can be used to install Argo CD, but this requires allowing `0.0.0.0/0` in the GKE Cluster Control Plane (the provider will check the connection every time, for example, GitHub Action runner). Alternatively, you can split a new Terraform directory and use Terraform config to install Argo CD after the GKE Cluster is created.
-- For the application external load balancer, consider adding Cloud Armor (WAF) for enhanced security.
-- For the ArgoCD UI, consider using an internal load balancer and accessing it via a private network (VPN) or by whitelisting IPs with Cloud Armor.
-- Although the GKE cluster has a public IP with a whitelist to allow CICD/Local access, it is recommended to use a fully private cluster and a self-hosted agent like Jenkins to access the GKE cluster.
-- Set `control_plane_open` to true if you want to access the GKE Cluster. We recommend disabling it.
-- 
+- **Terraform and ArgoCD Integration**: While Terraform can install Argo CD, it requires allowing `0.0.0.0/0` in the GKE Cluster Control Plane. This is necessary because the provider checks the connection each time, such as during GitHub Action runner executions. Alternatively, consider creating a separate Terraform directory and using Terraform configurations to install Argo CD after the GKE Cluster is created.
+- **Security Enhancements**:
+    - For the application external load balancer, consider adding Cloud Armor (WAF) for enhanced security.
+    - For the Argo CD UI, consider using an internal load balancer and accessing it via a private network (VPN) or by whitelisting IPs with Cloud Armor.
+    - Although the GKE cluster has a public IP with a whitelist to allow CICD/Local access, it is recommended to use a fully private cluster and a self-hosted agent like Jenkins to access the GKE cluster.
+- **ExternalDNS Limitations**: ExternalDNS does not currently support creating records with routing policies in Google Cloud DNS. This feature could be leveraged to support geolocation routing, which can be more cost-effective for protecting the external load balancer (e.g., redirecting clients from specific geolocations to an empty site).
+- **Control Plane Security**: Set `control_plane_open` to true if you need to access the GKE Cluster. However, it is recommended to disable it to enhance security.
+- **GKE Gateway Controller**: For GCP, consider using the GKE Gateway controller instead of the GKE Ingress controller. This enables integration with deployment strategies like Argo Rollouts and simplifies operations across teams (e.g., cross-namespace routing, role-based access). The GCP Gateway controller is intended to replace the Ingress controller, with the latest updates in June 2023 and September 2024, respectively.
