@@ -51,26 +51,23 @@ control_plane_open            = true
 ## Estimated Cost
 
 ```table
-module.gke.google_container_node_pool.pools["assignmentnonprod-node-pool"]
- ├─ Instance usage (Linux/UNIX, on-demand, e2-standard-4) 730 hours $120.69
- └─ SSD provisioned storage (pd-ssd) 40 GB $7.48
-
-module.gke.google_container_cluster.primary
- ├─ Cluster management fee 730 hours $73.00
-
-google_compute_global_address.static
- └─ IP address (unused) 730 hours $7.30
-
-module.cloud-nat.google_compute_router_nat.main
- └─ Data processed Monthly cost depends on usage: $0.045 per GB
-
-google_dns_record_set.dns
- └─ Queries Monthly cost depends on usage: $0.40 per 1M queries
-
-OVERALL TOTAL $208.47
+Name                                                                           Monthly Qty  Unit              Monthly Cost   
+                                                                                                                              
+module.gke.google_container_cluster.primary                                                                                  
+├─ Cluster management fee                                                              730  hours                   $73.00   
+                                                                                                                              
+module.gke.google_container_node_pool.pools["assignmentnonprod-node-pool"]                                                   
+├─ Instance usage (Linux/UNIX, on-demand, e2-standard-2)                               730  hours                   $60.35   
+└─ SSD provisioned storage (pd-ssd)                                                     40  GB                       $7.48   
+                                                                                                                              
+module.cloud-nat.google_compute_router_nat.main                                                                              
+└─ Data processed                                                           Monthly cost depends on usage: $0.045 per GB     
+                                                                                                                              
+OVERALL TOTAL                                                                                                        $140.83          
 ```
 
 ## Running Terraform Locally
+
 
 ```sh
 export GOOGLE_APPLICATION_CREDENTIALS="/path/key/file.json"
@@ -105,7 +102,6 @@ Ensure the following secrets are set in your GitHub repository:
 - `TF_BACKEND_BUCKET`: The name of the Terraform backend bucket.
 - `TF_BACKEND_PATH`: The path for the Terraform backend.
 
-## Acknowledgements
 ## Acknowledgements
 
 - **Terraform and ArgoCD Integration**: While Terraform can install Argo CD, it requires allowing `0.0.0.0/0` in the GKE Cluster Control Plane. This is necessary because the provider checks the connection each time, such as during GitHub Action runner executions. Alternatively, consider creating a separate Terraform directory and using Terraform configurations to install Argo CD after the GKE Cluster is created.
