@@ -10,6 +10,20 @@ configs:
     policy.default: "role:readonly"
 
 server:
+  server:
+    route:
+      enabled: true
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  readinessProbe:
+    httpGet:
+      path: /healthz
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 10
   service:
     annotations:
       cloud.google.com/neg: '{"ingress": true}'

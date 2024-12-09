@@ -63,6 +63,10 @@ spec:
       serviceAccountName: external-dns
       containers:
         - name: external-dns
+          resources:
+            limits:
+              memory: 128Mi
+              cpu: 100m
           image: registry.k8s.io/external-dns/external-dns:v0.15.0
           securityContext:
             allowPrivilegeEscalation: false
